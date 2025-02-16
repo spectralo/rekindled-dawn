@@ -1,0 +1,13 @@
+If you ever add an NPC, it needs to have the following things: 
+affirm_type function - make it return literally anything, that doesn't matter (yet :3)
+
+modes in the move function: 
+0 - normal walk
+1 - keyboard dash
+2 - mouse based dash
+
+
+If you want to add a new mode for the move function, only things that need to be done are adding an if statement which assigns the trans variable some transition of your choice and whatever dark arts you wish to commit on the directions vector (reference for future combat updates)
+
+touching the text function is bad for health, that thing is half eldritch magic beyond my understanding.
+
