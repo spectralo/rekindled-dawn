@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://le7jsbq447d4"]
+
+[ext_resource type="Script" path="res://scripts/character_body_2d (2).gd" id="1_fnv3f"]
+[ext_resource type="Texture2D" uid="uid://cgugbejky03vs" path="res://assets/sprites/enemies/skeleton/Skeleton.png" id="2_bkosf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to1hd"]
+atlas = ExtResource("2_bkosf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viuvc"]
+atlas = ExtResource("2_bkosf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnll1"]
+atlas = ExtResource("2_bkosf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54vej"]
+atlas = ExtResource("2_bkosf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1op7s"]
+atlas = ExtResource("2_bkosf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0aoh"]
+atlas = ExtResource("2_bkosf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jjsdk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to1hd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_viuvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnll1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54vej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1op7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0aoh")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u47cs"]
+size = Vector2(11, 15)
+
+[node name="enemy" type="CharacterBody2D"]
+position = Vector2(0, -4)
+script = ExtResource("1_fnv3f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, 4.76837e-07)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_jjsdk")
+animation = &"front"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, -2.5)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_u47cs")
+
+[node name="attacktimer" type="Timer" parent="."]
+wait_time = 1.101
+one_shot = true

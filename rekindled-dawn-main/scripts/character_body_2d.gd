@@ -7,14 +7,13 @@ var moving = false
 var text =  null
 var timer = 0
 var current = 0
-
 #for movement
 var done = true
 var dir = "front"
 var cooldown = false
 var thing = null
 var col
-
+var HP = 50
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var cdtime: Timer = $cooldowntime
 #random helper functions
@@ -30,44 +29,50 @@ func translate_dir(dir):
 	if dir == "front":
 		return Vector2(0,1)
 		
+func affirm_type():
+	return "player"
+		
 @warning_ignore("shadowed_variable")
 #allows things to move in a grid, mode 0 is walk, mode 1 is dash, mode 2 is mouse dash
 func move(mode=0):
-	var trans = Tween.TRANS_LINEAR
-	if mode == 1:
-		direction*=3
-		trans = Tween.TRANS_SPRING
-	if mode == 2:
-		direction = (get_global_mouse_position()-position).normalized()*4
-		direction.x = int(direction.x)
-		direction.y = int(direction.y)
-		trans = Tween.TRANS_SPRING
-	if direction.x != 0 and direction.y != 0:
-		direction.normalized()
-	if moving or direction == Vector2.ZERO:
-		return  
-		
-	var target_position = position + direction * 16 * 5
-	var collision = move_and_collide(direction * 16 * 5,true)
-	
-	if collision:
-		var collidee = collision.get_collider()
-		if collidee.has_method("affirm_type"):
-			if mode == 2:
-				collidee.HP -= 40
-		else:
-			return 
+	if HP:
+		var trans = Tween.TRANS_LINEAR
+		if mode == 1:
+			direction*=3
+			trans = Tween.TRANS_SPRING
+		if mode == 2:
+			direction = (get_global_mouse_position()-position).normalized()*5
+			direction.x = int(direction.x)
+			direction.y = int(direction.y)
+			trans = Tween.TRANS_SPRING
+		if direction.x != 0 and direction.y != 0:
+			direction.normalized()
+		if moving or direction == Vector2.ZERO:
+			return  
 			
-	moving = true #moving determines if your next keypress immediately starts moving the character or after one full grid based movement
-	
-	var tween = create_tween()
-	tween.tween_property(self, "position", target_position, 0.2).set_trans(trans)
-	tween.tween_callback(move_false)
-
+		var target_position = position + direction * 16 * 5
+		var collision = move_and_collide(direction * 16 * 5,true)
+		
+		if collision:
+			var collidee = collision.get_collider()
+			if collidee.has_method("affirm_type"):
+				if mode == 2:
+					collidee.HP -= 1
+					collidee.direction = Vector2(-int(collision.get_normal().x),-int(collision.get_normal().y))*-5
+					collidee.move(0)
+			else:
+				return 
+				
+		moving = true #moving determines if your next keypress immediately starts moving the character or after one full grid based movement
+		var tween = create_tween()
+		tween.tween_property(self, "position", target_position, 0.2).set_trans(trans)
+		tween.tween_callback(move_false)
+	else:
+		pass
 func move_false():
 	moving = false
 
-#just increments visible character, helper function for talk(), do not touch 
+#just increments visible character, helper function for talk()
 @warning_ignore("shadowed_variable")
 func stream_text(text):
 	done = false
@@ -77,7 +82,6 @@ func stream_text(text):
 		done = true
 	$text.visible_characters=current
 
-#here because you thought everything was cluttered :D	
 func animate():
 	if direction:
 		if direction.x > 0:
@@ -103,7 +107,7 @@ func talk(delta):
 		timer = 0
 		if text != null:
 			stream_text(text)
-	#This looks really weird but it's literally nothing just toggling the visibility of the text box
+	#This is toggling the visibility of the text box
 	if Input.is_action_just_pressed("interact") and thing.has_method("get_text"):
 		if $textbox.visible:
 			if not done:
@@ -122,11 +126,6 @@ func talk(delta):
 
 #here to  hurt things if they are real (are NPCs), and also the keyboard based dashing
 func process_input():
-	if Input.is_action_just_pressed("hurt"):
-		if thing != null:
-			if thing.has_method("affirm_type"):
-				thing.HP -= 20
-				_animated_sprite.play("attack_front")
 	if done:	
 		if Input.is_action_pressed("ui_down") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_left"):
 			direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")		
@@ -140,15 +139,15 @@ func process_input():
 func _physics_process(delta: float) -> void:
 	talk(delta)
 	process_input()
+	animate()
 	#checks if there is an object adjacent in the direction the character is pointing towards
 	col = move_and_collide(translate_dir(dir)*16*5,true)
 	if col:
 		thing = col.get_collider()	
-		animate()
-		if not moving:
-			_animated_sprite.stop()
 	else: 
 		thing = null
+	if not moving:
+		_animated_sprite.stop()
 			
 func _input(event: InputEvent) -> void:
 	#mouse dash >:) 
@@ -159,5 +158,11 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("hurt"):
 		if thing != null:
 			if thing.has_method("affirm_type"):
-				thing.HP -= 20
+				thing.HP -= 1
+				print(thing.tween_exists)
+				if thing.tween_exists:
+					print("DIE HEATHEN DIE REE")
+					thing.tween.kill()
+				thing.direction = translate_dir(dir)
+				thing.move(0)
 				_animated_sprite.play("attack_"+dir)
