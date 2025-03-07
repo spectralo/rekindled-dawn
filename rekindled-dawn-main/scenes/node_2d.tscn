@@ -1,6 +1,7 @@
-[gd_scene load_steps=75 format=3 uid="uid://p4118ivij2ce"]
+[gd_scene load_steps=82 format=3 uid="uid://p4118ivij2ce"]
 
 [ext_resource type="Texture2D" uid="uid://cmpde8obo0f17" path="res://assets/tilesets/biome1/FarmLand_Tile.png" id="1_jnt7l"]
+[ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_mxs31"]
 [ext_resource type="Texture2D" uid="uid://cu5cvy71hmsyi" path="res://assets/tilesets/biome1/Cliff_Tile.png" id="2_7jhoc"]
 [ext_resource type="Texture2D" uid="uid://daxw7fia7kb8e" path="res://assets/tilesets/biome1/Grass_Middle.png" id="3_rpfos"]
 [ext_resource type="Texture2D" uid="uid://cbi05afbqxacp" path="res://assets/tilesets/biome1/Path_Middle.png" id="4_ht64l"]
@@ -10,10 +11,12 @@
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="8_d8e76"]
 [ext_resource type="Texture2D" uid="uid://cgf15ef38frg0" path="res://assets/sprites/characters/mage/Mage-Sheet.png" id="9_p0iqe"]
 [ext_resource type="Texture2D" uid="uid://d3kwgtiketpm6" path="res://assets/sprites/icon.svg" id="10_p6dt0"]
-[ext_resource type="FontFile" uid="uid://2py3otgitx48" path="res://assets/rekindledrunes.ttf" id="11_2eu76"]
+[ext_resource type="FontFile" path="res://assets/rekindledrunes.ttf" id="11_2eu76"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="13_nrq57"]
 [ext_resource type="Texture2D" uid="uid://dkhfbfnr3mlvx" path="res://exports/rekindled-dawns.icon.png" id="13_uk551"]
 [ext_resource type="PackedScene" uid="uid://le7jsbq447d4" path="res://scenes/character_body_2d.tscn" id="14_nwnxu"]
+[ext_resource type="Script" path="res://scripts/h_box_container.gd" id="16_0nxhq"]
+[ext_resource type="Texture2D" uid="uid://2qdvirvw5lrk" path="res://assets/sprites/utils/Hearts.png" id="17_d7wuv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jf8mo"]
 
@@ -492,6 +495,45 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s8bv"]
+atlas = ExtResource("17_d7wuv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qo3w"]
+atlas = ExtResource("17_d7wuv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ly3i"]
+atlas = ExtResource("17_d7wuv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3lkm4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s8bv")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qo3w")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ly3i")
+}],
+"loop": true,
+"name": &"half",
+"speed": 5.0
+}]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_cd1ll"]
 animations = [{
 "frames": [{
@@ -504,6 +546,7 @@ animations = [{
 }]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_mxs31")
 
 [node name="map" type="TileMap" parent="."]
 scale = Vector2(5, 5)
@@ -511,7 +554,7 @@ tile_set = SubResource("TileSet_ecxng")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 6, 0, 1, 65542, 0, 2, 65542, 0, 3, 65542, 0, 4, 65542, 0, 5, 65542, 0, 6, 131078, 0, 65536, 6, 1, 131072, 6, 1, 196608, 6, 1, 65542, 131078, 1, 131078, 131078, 1, 196614, 131078, 1, 262144, 6, 2, 262150, 131078, 2, 262145, 65542, 2, 262146, 65542, 2, 262147, 65542, 2, 262148, 65542, 2, 262149, 65542, 2, 196609, 5, 0, 131073, 5, 0, 65539, 5, 0, 65541, 5, 0, 131077, 5, 0, 131076, 5, 0, 131075, 5, 0, 131074, 5, 0, 196610, 5, 0, 196611, 5, 0, 196612, 5, 0, 196613, 5, 0, 7, 4, 0, 65543, 4, 1, 131079, 4, 1, 196615, 4, 1, 262151, 4, 1, 65544, 3, 0, 8, 65540, 0, 131080, 3, 0, 196616, 3, 0, 262152, 3, 0, 327680, 2, 0, 327681, 2, 0, 327682, 2, 0, 327683, 2, 0, 327684, 2, 0, 327685, 2, 0, 327686, 2, 0, 327687, 4, 1, 9, 65540, 0, 10, 65540, 0, 11, 65540, 0, 65545, 3, 0, 65546, 3, 0, 65547, 3, 0, 196617, 131076, 1, 131081, 4, 3, 327689, 131076, 1, 262153, 131076, 1, 131082, 65540, 2, 131083, 65540, 2, 65540, 5, 0, 65537, 5, 0, 327688, 3, 0, 65538, 5, 0)
 
-[node name="player" type="CharacterBody2D" parent="."]
+[node name="player" type="CharacterBody2D" parent="." groups=["Persists"]]
 position = Vector2(763, 370)
 scale = Vector2(5, 5)
 script = ExtResource("8_d8e76")
@@ -554,13 +597,45 @@ autowrap_mode = 1
 [node name="cooldowntime" type="Timer" parent="player"]
 one_shot = true
 
-[node name="Book Layer" type="CanvasLayer" parent="."]
+[node name="Hearts" type="HBoxContainer" parent="player"]
+offset_left = 42.0
+offset_top = 51.4
+offset_right = 421.0
+offset_bottom = 122.4
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_0nxhq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/Hearts"]
+sprite_frames = SubResource("SpriteFrames_3lkm4")
+animation = &"full"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="player/Hearts"]
+position = Vector2(16, -5.96046e-08)
+sprite_frames = SubResource("SpriteFrames_3lkm4")
+animation = &"full"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="player/Hearts"]
+position = Vector2(32, 0)
+sprite_frames = SubResource("SpriteFrames_3lkm4")
+animation = &"full"
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="player/Hearts"]
+position = Vector2(48, 0)
+sprite_frames = SubResource("SpriteFrames_3lkm4")
+animation = &"full"
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="player/Hearts"]
+position = Vector2(64, -5.96046e-07)
+sprite_frames = SubResource("SpriteFrames_3lkm4")
+animation = &"full"
+
+[node name="Book Layer" type="CanvasLayer" parent="." groups=["Persists"]]
 script = ExtResource("13_nrq57")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Book Layer"]
 visible = false
-position = Vector2(566, 332)
-scale = Vector2(9.03125, 5.07031)
+position = Vector2(577, 322.869)
+scale = Vector2(8.07607, 4.10733)
 sprite_frames = SubResource("SpriteFrames_cd1ll")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Book Layer/AnimatedSprite2D"]
@@ -611,8 +686,9 @@ scale = Vector2(0.2, 0.2)
 theme_override_font_sizes/font_size = 31
 
 [node name="enemy" parent="." instance=ExtResource("14_nwnxu")]
-position = Vector2(834, 114)
+position = Vector2(935, 205)
 target = NodePath("../player")
+type = 1
 
 [connection signal="gui_input" from="Book Layer/AnimatedSprite2D/RichTextLabel" to="Book Layer" method="_on_rich_text_label_gui_input"]
 [connection signal="gui_input" from="Book Layer/AnimatedSprite2D/RichTextLabel2" to="Book Layer" method="_on_rich_text_label_2_gui_input"]

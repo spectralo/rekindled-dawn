@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 var direction = Vector2.ZERO
 var moving = false
-var HP = 40
+var HP = 10
 var tween: Tween
 var tpos: Vector2
 var tween_exists = false
@@ -28,9 +28,9 @@ func _process(delta):
 				if collision.get_collider().affirm_type() == "player":
 					collision.get_collider().direction = Vector2(-collision.get_normal().x*2,-collision.get_normal().y*2)
 					collision.get_collider().move(0)
+					collision.get_collider().HP-=1
 			else:
 				position += collision.get_normal()*16*5
-				print("dumb collision")
 			tween.kill()
 	if type == 0:
 		velocity = (position-otherpos).normalized()*-2
@@ -40,13 +40,6 @@ func _process(delta):
 	if type == 1:
 		if cooldown.is_stopped():
 			var target_position = position+(position-otherpos).normalized()*-80*4
-			var collision = move_and_collide((position-otherpos).normalized()*-80*4,true)
-			if collision:
-				var collidee = collision.get_collider()
-				if collidee.has_method("affirm_type"):
-					collidee.HP -= 1
-					#collidee.direction = Vector2(-int(collision.get_normal().x),-int(collision.get_normal().y))
-					#collidee.move(0)
 			tween_exists = true
 			tween = create_tween()
 			tween.tween_property(self, "position", target_position, 1).set_trans(Tween.TRANS_SPRING)
@@ -104,9 +97,20 @@ func move(mode=0,transtime=0.2):
 	else:
 		pass
 		
-#func _input(event):
-	#if event is InputEventMouseButton:
-		#print('killing')
-		#tween.kill()
+func save():
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"parent" : get_parent().get_path(),
+		"pos_x" : position.x, # Vector2 is not supported by JSON
+		"pos_y" : position.y,
+		"current_health" : HP,
+	}
+	return [position.x,position.y,HP]
+	
+func load(vals):
+	position.x = vals[0]
+	position.y = vals[1]
+	HP = vals[2]
+	
 func move_false():
 	moving = false

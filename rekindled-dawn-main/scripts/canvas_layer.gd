@@ -92,3 +92,15 @@ func update_page():
 		orich_text_label.visible = true
 		oline_edit.visible = false
 		orich_text_label.text = texts[index]
+		
+func save():
+	var a = []
+	for i in range(texts.size()):
+		a.append(texts[i])
+	print(a)
+	return a
+	
+func load(vals):
+	for i in range(vals.size()):
+		texts[i] = vals[i]
+	

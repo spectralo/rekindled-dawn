@@ -7,18 +7,18 @@ var moving = false
 var text =  null
 var timer = 0
 var current = 0
+
 #for movement
 var done = true
 var dir = "front"
 var cooldown = false
 var thing = null
 var col
-var HP = 50
+var HP = 10
+
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var cdtime: Timer = $cooldowntime
-#random helper functions
 
-#here so that you can use the same variable named dir for both animation of sprites as well as math
 func translate_dir(dir):
 	if dir == "left":
 		return Vector2(-1,0)
@@ -33,7 +33,6 @@ func affirm_type():
 	return "player"
 		
 @warning_ignore("shadowed_variable")
-#allows things to move in a grid, mode 0 is walk, mode 1 is dash, mode 2 is mouse dash
 func move(mode=0):
 	if HP:
 		var trans = Tween.TRANS_LINEAR
@@ -166,3 +165,11 @@ func _input(event: InputEvent) -> void:
 				thing.direction = translate_dir(dir)
 				thing.move(0)
 				_animated_sprite.play("attack_"+dir)
+				
+func save():
+	return [position.x,position.x,HP]
+
+func load(vals):
+	position.x = vals[0]
+	position.y = vals[1]
+	HP = vals[2]	
