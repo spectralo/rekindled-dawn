@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://p4118ivij2ce"]
+[gd_scene load_steps=23 format=3 uid="uid://p4118ivij2ce"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_k68r5"]
 [ext_resource type="Texture2D" uid="uid://cmpde8obo0f17" path="res://assets/tilesets/biome1/FarmLand_Tile.png" id="2_vsrad"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://covqmsg2ikxrw" path="res://assets/tilesets/biome1/Water_Tile.png" id="8_iassf"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="9_obiat"]
 [ext_resource type="Texture2D" uid="uid://dkhfbfnr3mlvx" path="res://exports/rekindled-dawns.icon.png" id="10_fgqxw"]
-[ext_resource type="PackedScene" uid="uid://b6aemxc5nv20v" path="res://scenes/Tbox.tscn" id="11_qryly"]
 [ext_resource type="PackedScene" uid="uid://le7jsbq447d4" path="res://scenes/character.tscn" id="12_qx25v"]
 [ext_resource type="PackedScene" uid="uid://jb05c0muhil4" path="res://scenes/player.tscn" id="13_kc4kr"]
 
@@ -185,16 +184,13 @@ offset_bottom = 90.4592
 scale = Vector2(0.2, 0.2)
 theme_override_font_sizes/font_size = 31
 
-[node name="TextBox" parent="Book Layer" instance=ExtResource("11_qryly")]
-visible = false
-position = Vector2(578, 323)
-
 [node name="enemy" parent="." node_paths=PackedStringArray("targ") instance=ExtResource("12_qx25v")]
 position = Vector2(935, 205)
 targ = NodePath("../Node2D")
 type = 4
 
 [node name="Node2D" parent="." instance=ExtResource("13_kc4kr")]
+visible = false
 position = Vector2(2, 3)
 
 [connection signal="gui_input" from="Book Layer/AnimatedSprite2D/RichTextLabel" to="Book Layer" method="_on_rich_text_label_gui_input"]

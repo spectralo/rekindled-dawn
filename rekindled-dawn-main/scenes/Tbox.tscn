@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6aemxc5nv20v"]
+[gd_scene load_steps=3 format=3 uid="uid://b36rwc68m8x1s"]
 
 [ext_resource type="Texture2D" uid="uid://d3kwgtiketpm6" path="res://assets/sprites/icon.svg" id="1_6x56s"]
 [ext_resource type="FontFile" uid="uid://2py3otgitx48" path="res://assets/fonts/rekindledrunes.ttf" id="2_1l4ih"]
