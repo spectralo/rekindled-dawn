@@ -15,8 +15,7 @@ func _ready() -> void:
 				continue
 			var node_data = save_file.get_var(true)
 			node.call("load", node_data)
-
-
+			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

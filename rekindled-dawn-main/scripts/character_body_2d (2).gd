@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var target: NodePath
+@export var targ: Node
 @export var type: int
 
 var direction = Vector2.ZERO
@@ -9,8 +9,10 @@ var HP = 10
 var tween: Tween
 var tpos: Vector2
 var tween_exists = false
+var hit = false
 
-@onready var otherpos = get_node(target).position
+@onready var target = targ.get_node("player")
+@onready var otherpos = target.position
 @onready var cooldown = $attacktimer
 
 func _ready():
@@ -18,14 +20,15 @@ func _ready():
 		cooldown.wait_time = 2
 		
 func _process(delta):
-	otherpos = get_node(target).position
+	otherpos = target.position
 	if tween_exists:
 		if not tween.is_running():
 			tween_exists = false
 		var collision = move_and_collide(position-otherpos,true)
-		if collision:
+		if collision and not hit:
 			if collision.get_collider().has_method("affirm_type"):
 				if collision.get_collider().affirm_type() == "player":
+					print('hellllllllllllllllll')
 					collision.get_collider().direction = Vector2(-collision.get_normal().x*2,-collision.get_normal().y*2)
 					collision.get_collider().move(0)
 					collision.get_collider().HP-=1
@@ -81,6 +84,7 @@ func move(mode=0,transtime=0.2):
 			var collidee = collision.get_collider()
 			if collidee.has_method("affirm_type"):
 				if mode == 2:
+					print('hellooooo')
 					collidee.HP -= 1
 					collidee.direction = Vector2(-int(collision.get_normal().x),-int(collision.get_normal().y))*160
 					collidee.move(0)
@@ -114,3 +118,4 @@ func load(vals):
 	
 func move_false():
 	moving = false
+	hit = false

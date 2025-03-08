@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-
+@export var player: Node
 # Called when the node enters the scene tree for the first time.
 @onready var line_edit = $AnimatedSprite2D/LineEdit
 @onready var rich_text_label = $AnimatedSprite2D/RichTextLabel
@@ -11,6 +11,11 @@ extends CanvasLayer
 
 var texts = []
 var index = 0
+var text = null
+var timer = 0
+var done = false
+var current = 0
+
 func _ready():
 	for i in range(10*2):
 		texts.append("")
@@ -18,7 +23,11 @@ func _ready():
 	oline_edit.text_submitted.connect(_on_text_entered2)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	timer+=delta
+	if timer>= 0.2:
+		timer = 0
+		if text != null:
+			stream_text(text)
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Book"):
@@ -103,4 +112,28 @@ func save():
 func load(vals):
 	for i in range(vals.size()):
 		texts[i] = vals[i]
+		
+func stream_text(text):
+	done = false
+	if current < len(text):
+		current += 1
+	else:
+		done = true
+	$TextBox/text.visible_characters=current
 	
+func _on_player_text_moment(string: Variant) -> void:
+	#This is toggling the visibility of the text box
+	print('helloooo')
+	if $TextBox.visible:
+		if not done:
+			return
+		else:
+			$TextBox.visible = not $TextBox.visible
+			$TextBox.visible = $TextBox.visible
+			done = true
+			return
+	current = 0
+	text = string #perform black magic and acquire text
+	$TextBox/text.visible_characters=0
+	$TextBox/text.text = text
+	$TextBox.visible = not $TextBox.visible

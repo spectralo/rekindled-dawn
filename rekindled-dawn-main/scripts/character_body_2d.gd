@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal text_moment(string)
+
 var direction = Vector2.ZERO
 var moving = false
 
@@ -57,6 +59,8 @@ func move(mode=0):
 			if collidee.has_method("affirm_type"):
 				if mode == 2:
 					collidee.HP -= 1
+					collidee.hit = true
+					HP -= 1
 					collidee.direction = Vector2(-int(collision.get_normal().x),-int(collision.get_normal().y))*-5
 					collidee.move(0)
 			else:
@@ -122,6 +126,7 @@ func talk(delta):
 		$text.text = text
 		$textbox.visible = not $textbox.visible
 		$text.visible = $textbox.visible
+		emit_signal("text_moment",text)
 
 #here to  hurt things if they are real (are NPCs), and also the keyboard based dashing
 func process_input():
@@ -155,16 +160,33 @@ func _input(event: InputEvent) -> void:
 			move(2)
 	#mouse attack, again, after checking if the thing being hurt is real
 	if Input.is_action_just_pressed("hurt"):
-		if thing != null:
-			if thing.has_method("affirm_type"):
-				thing.HP -= 1
-				print(thing.tween_exists)
-				if thing.tween_exists:
-					print("DIE HEATHEN DIE REE")
-					thing.tween.kill()
-				thing.direction = translate_dir(dir)
-				thing.move(0)
-				_animated_sprite.play("attack_"+dir)
+		#if thing != null:
+			#if thing.has_method("affirm_type"):
+				#thing.HP -= 1
+				#print(thing.tween_exists)
+				#if thing.tween_exists:
+					#print("DIE HEATHEN DIE REE")
+					#thing.tween.kill()
+				#thing.direction = translate_dir(dir)
+				#thing.move(0)
+				#_animated_sprite.play("attack_"+dir)
+		if $Area2D.get_overlapping_areas().size() > 0:
+			for i in $Area2D.get_overlapping_areas():
+				if i.get_parent().has_method("affirm_type"):
+					if i.get_parent().affirm_type() != "player":
+						print(i.get_parent().affirm_type())
+						print('hello')
+						var t = i.get_parent()
+						t.HP -= 1
+						print(t.tween_exists)
+						if t.tween_exists:
+							print("DIE HEATHEN DIE REE")
+							t.tween.kill()
+						t.direction = translate_dir(dir)
+						t.move(0)
+						t.hit = true
+						_animated_sprite.play("attack_"+dir)
+					
 				
 func save():
 	return [position.x,position.x,HP]
