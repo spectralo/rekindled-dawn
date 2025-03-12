@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dhfw1omldv15u"]
+
+[ext_resource type="Texture2D" uid="uid://b3m5j5iyo7lft" path="res://assets/sprites/animals/cow/Cow.png" id="1_ae860"]
+[ext_resource type="Script" path="res://characters/dude/dude.gd" id="1_xyav5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcv8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7o5h"]
+atlas = ExtResource("1_ae860")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiso5"]
+atlas = ExtResource("1_ae860")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er4ca"]
+atlas = ExtResource("1_ae860")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6huly"]
+atlas = ExtResource("1_ae860")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tkwa3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7o5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiso5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er4ca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6huly")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2i5i"]
+radius = 21.0238
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(124, 45)
+scale = Vector2(5, 5)
+script = ExtResource("1_xyav5")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vcv8o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tkwa3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_b2i5i")

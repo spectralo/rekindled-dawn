@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqkl7bkfn6jvm"]
+
+[ext_resource type="Texture2D" uid="uid://d3kwgtiketpm6" path="res://assets/sprites/icon.svg" id="1_2krlh"]
+[ext_resource type="FontFile" uid="uid://2py3otgitx48" path="res://assets/fonts/rekindledrunes.ttf" id="2_st1p7"]
+
+[node name="MarginContainer" type="MarginContainer"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_2krlh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="text" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_st1p7")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1

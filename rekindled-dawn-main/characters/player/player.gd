@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal text_moment(string)
+signal text_moment(parent,pos)
 
 var direction = Vector2.ZERO
 var moving = false
@@ -100,33 +100,6 @@ func animate():
 			_animated_sprite.play("front")
 			dir = "front"
 
-#this function has a fun thingy, this gets it's text from the NPC object's get_text function,
-#if there is no get_text function, the collider object will be set to null, because who really cares :D
-func talk(delta):
-	if thing == null:
-		return
-	timer+=delta
-	if timer>= 0.05:
-		timer = 0
-		if text != null:
-			stream_text(text)
-	#This is toggling the visibility of the text box
-	if Input.is_action_just_pressed("interact") and thing.has_method("get_text"):
-		if $textbox.visible:
-			if not done:
-				return
-			else:
-				$textbox.visible = not $textbox.visible
-				$text.visible = $textbox.visible
-				done = true
-				return
-		current = 0
-		text = thing.get_text() #perform black magic and acquire text
-		$text.visible_characters=0
-		$text.text = text
-		$textbox.visible = not $textbox.visible
-		$text.visible = $textbox.visible
-		emit_signal("text_moment",text)
 
 #here to  hurt things if they are real (are NPCs), and also the keyboard based dashing
 func process_input():
@@ -141,7 +114,7 @@ func process_input():
 			
 #ACTUAL GAME STUFF WOOO
 func _physics_process(delta: float) -> void:
-	talk(delta)
+	#talk(delta)
 	process_input()
 	animate()
 	#checks if there is an object adjacent in the direction the character is pointing towards
@@ -158,18 +131,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.double_click and event.button_index == 1:
 			move(2)
+	if Input.is_action_just_pressed("interact") and $Area2D.get_overlapping_areas().size()>0:
+		for i in $Area2D.get_overlapping_areas():
+			if i.get_parent().has_method("get_text"):
+				emit_signal("text_moment",i.get_parent(),i.get_parent().get_global_position())
 	#mouse attack, again, after checking if the thing being hurt is real
 	if Input.is_action_just_pressed("hurt"):
-		#if thing != null:
-			#if thing.has_method("affirm_type"):
-				#thing.HP -= 1
-				#print(thing.tween_exists)
-				#if thing.tween_exists:
-					#print("DIE HEATHEN DIE REE")
-					#thing.tween.kill()
-				#thing.direction = translate_dir(dir)
-				#thing.move(0)
-				#_animated_sprite.play("attack_"+dir)
 		if $Area2D.get_overlapping_areas().size() > 0:
 			for i in $Area2D.get_overlapping_areas():
 				if i.get_parent().has_method("affirm_type"):

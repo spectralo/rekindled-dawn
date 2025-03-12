@@ -1,6 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://p4118ivij2ce"]
+[gd_scene load_steps=26 format=3 uid="uid://p4118ivij2ce"]
 
-[ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_k68r5"]
+[ext_resource type="Script" path="res://main/save.gd" id="1_k68r5"]
 [ext_resource type="Texture2D" uid="uid://cmpde8obo0f17" path="res://assets/tilesets/biome1/FarmLand_Tile.png" id="2_vsrad"]
 [ext_resource type="Texture2D" uid="uid://cu5cvy71hmsyi" path="res://assets/tilesets/biome1/Cliff_Tile.png" id="3_v8a0a"]
 [ext_resource type="Texture2D" uid="uid://daxw7fia7kb8e" path="res://assets/tilesets/biome1/Grass_Middle.png" id="4_nh27e"]
@@ -8,11 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://cl8gxva1ogrd0" path="res://assets/tilesets/biome1/Path_Tile.png" id="6_kel2t"]
 [ext_resource type="Texture2D" uid="uid://c56ohpfqb221h" path="res://assets/tilesets/biome1/Water_Middle.png" id="7_bsbki"]
 [ext_resource type="Texture2D" uid="uid://covqmsg2ikxrw" path="res://assets/tilesets/biome1/Water_Tile.png" id="8_iassf"]
-[ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="9_obiat"]
+[ext_resource type="Script" path="res://ui/book_text/book_text.gd" id="9_obiat"]
 [ext_resource type="Texture2D" uid="uid://dkhfbfnr3mlvx" path="res://exports/rekindled-dawns.icon.png" id="10_fgqxw"]
-[ext_resource type="PackedScene" uid="uid://b6aemxc5nv20v" path="res://scenes/Tbox.tscn" id="11_qryly"]
-[ext_resource type="PackedScene" uid="uid://le7jsbq447d4" path="res://scenes/character.tscn" id="12_qx25v"]
-[ext_resource type="PackedScene" uid="uid://jb05c0muhil4" path="res://scenes/player.tscn" id="13_kc4kr"]
+[ext_resource type="PackedScene" uid="uid://bqkl7bkfn6jvm" path="res://ui/book_text/margin_container.tscn" id="11_h0sim"]
+[ext_resource type="PackedScene" uid="uid://le7jsbq447d4" path="res://characters/enemy/character.tscn" id="12_qx25v"]
+[ext_resource type="Script" path="res://characters/enemy/enemy.gd" id="13_jnel6"]
+[ext_resource type="PackedScene" uid="uid://jb05c0muhil4" path="res://characters/player/player.tscn" id="13_kc4kr"]
+[ext_resource type="PackedScene" uid="uid://dhfw1omldv15u" path="res://characters/dude/dude.tscn" id="15_0cpbg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jf8mo"]
 
@@ -185,17 +187,26 @@ offset_bottom = 90.4592
 scale = Vector2(0.2, 0.2)
 theme_override_font_sizes/font_size = 31
 
-[node name="TextBox" parent="Book Layer" instance=ExtResource("11_qryly")]
+[node name="TextBox" parent="Book Layer" instance=ExtResource("11_h0sim")]
 visible = false
-position = Vector2(578, 323)
+offset_left = 301.0
+offset_top = 517.0
+offset_right = 365.0
+offset_bottom = 585.0
 
 [node name="enemy" parent="." node_paths=PackedStringArray("targ") instance=ExtResource("12_qx25v")]
 position = Vector2(935, 205)
-targ = NodePath("../Node2D")
+script = ExtResource("13_jnel6")
+targ = NodePath("../player")
 type = 4
 
-[node name="Node2D" parent="." instance=ExtResource("13_kc4kr")]
+[node name="player" parent="." instance=ExtResource("13_kc4kr")]
 position = Vector2(2, 3)
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("15_0cpbg")]
+position = Vector2(969, 431)
+
+[connection signal="finished" from="Book Layer" to="player" method="_on_book_layer_finished"]
 [connection signal="gui_input" from="Book Layer/AnimatedSprite2D/RichTextLabel" to="Book Layer" method="_on_rich_text_label_gui_input"]
 [connection signal="gui_input" from="Book Layer/AnimatedSprite2D/RichTextLabel2" to="Book Layer" method="_on_rich_text_label_2_gui_input"]
+[connection signal="text_moment" from="player" to="Book Layer" method="_on_node_2d_text_moment"]

@@ -8,6 +8,8 @@ extends CanvasLayer
 @onready var oline_edit = $AnimatedSprite2D/LineEdit2
 @onready var orich_text_label = $AnimatedSprite2D/RichTextLabel2
 
+signal finished
+
 
 var texts = []
 var index = 0
@@ -24,7 +26,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	timer+=delta
-	if timer>= 0.2:
+	if timer>= 0.1:
 		timer = 0
 		if text != null:
 			stream_text(text)
@@ -119,10 +121,10 @@ func stream_text(text):
 		current += 1
 	else:
 		done = true
-	$TextBox/text.visible_characters=current
+	$TextBox/MarginContainer/text.visible_characters=current
 	
-func _on_player_text_moment(string: Variant) -> void:
-	#This is toggling the visibility of the text box
+
+func _on_node_2d_text_moment(parent: Variant,pos: Variant) -> void:
 	print('helloooo')
 	if $TextBox.visible:
 		if not done:
@@ -131,9 +133,13 @@ func _on_player_text_moment(string: Variant) -> void:
 			$TextBox.visible = not $TextBox.visible
 			$TextBox.visible = $TextBox.visible
 			done = true
+			emit_signal("finished")
 			return
 	current = 0
-	text = string #perform black magic and acquire text
-	$TextBox/text.visible_characters=0
-	$TextBox/text.text = text
+	text = parent.get_text() #perform black magic and acquire text
+	$TextBox /MarginContainer/text.visible_characters=0
+	$TextBox/MarginContainer/text.text = text
 	$TextBox.visible = not $TextBox.visible
+	var ob_pos = parent.get_global_transform_with_canvas()
+	$TextBox.position = ob_pos.get_origin()-((parent.get_node("CollisionShape2D").shape.extents*2*5)+Vector2(0,64))
+	
