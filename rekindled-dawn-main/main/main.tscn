@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://p4118ivij2ce"]
+[gd_scene load_steps=25 format=3 uid="uid://p4118ivij2ce"]
 
 [ext_resource type="Script" path="res://main/save.gd" id="1_k68r5"]
 [ext_resource type="Texture2D" uid="uid://cmpde8obo0f17" path="res://assets/tilesets/biome1/FarmLand_Tile.png" id="2_vsrad"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://dkhfbfnr3mlvx" path="res://exports/rekindled-dawns.icon.png" id="10_fgqxw"]
 [ext_resource type="PackedScene" uid="uid://bqkl7bkfn6jvm" path="res://ui/book_text/margin_container.tscn" id="11_h0sim"]
 [ext_resource type="PackedScene" uid="uid://le7jsbq447d4" path="res://characters/enemy/character.tscn" id="12_qx25v"]
-[ext_resource type="Script" path="res://characters/enemy/enemy.gd" id="13_jnel6"]
 [ext_resource type="PackedScene" uid="uid://jb05c0muhil4" path="res://characters/player/player.tscn" id="13_kc4kr"]
 [ext_resource type="PackedScene" uid="uid://dhfw1omldv15u" path="res://characters/dude/dude.tscn" id="15_0cpbg"]
 
@@ -196,7 +195,6 @@ offset_bottom = 585.0
 
 [node name="enemy" parent="." node_paths=PackedStringArray("targ") instance=ExtResource("12_qx25v")]
 position = Vector2(935, 205)
-script = ExtResource("13_jnel6")
 targ = NodePath("../player")
 type = 4
 

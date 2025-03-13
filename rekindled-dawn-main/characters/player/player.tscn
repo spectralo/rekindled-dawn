@@ -447,39 +447,46 @@ sprite_frames = SubResource("SpriteFrames_e3053")
 animation = &"front"
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(0.5, 0.5)
 
 [node name="cooldowntime" type="Timer" parent="player"]
 one_shot = true
 
 [node name="Hearts" type="HBoxContainer" parent="player"]
-offset_left = 79.4
-offset_top = 59.2
-offset_right = 458.4
-offset_bottom = 130.2
+offset_left = -215.0
+offset_top = -117.0
+offset_right = 34.0
+offset_bottom = -63.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("4_o8me0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/Hearts"]
+position = Vector2(2.6, 2.6)
+scale = Vector2(1.325, 1.325)
 sprite_frames = SubResource("SpriteFrames_8xedk")
 animation = &"full"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="player/Hearts"]
-position = Vector2(16, -5.96046e-08)
+position = Vector2(26, 2.6)
+scale = Vector2(1.325, 1.325)
 sprite_frames = SubResource("SpriteFrames_8xedk")
 animation = &"full"
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="player/Hearts"]
-position = Vector2(32, 0)
+position = Vector2(49.6, 2.6)
+scale = Vector2(1.325, 1.325)
 sprite_frames = SubResource("SpriteFrames_8xedk")
 animation = &"full"
 
 [node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="player/Hearts"]
-position = Vector2(48, 0)
+position = Vector2(73.2, 2.6)
+scale = Vector2(1.325, 1.325)
 sprite_frames = SubResource("SpriteFrames_8xedk")
 animation = &"full"
 
 [node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="player/Hearts"]
-position = Vector2(64, -5.96046e-07)
+position = Vector2(96.4, 2.6)
+scale = Vector2(1.325, 1.325)
 sprite_frames = SubResource("SpriteFrames_8xedk")
 animation = &"full"
 

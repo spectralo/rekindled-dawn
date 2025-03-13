@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://kucx2d7w42uv"]
+[gd_scene load_steps=25 format=3 uid="uid://d00qthguxcqne"]
 
 [ext_resource type="Script" path="res://main/save.gd" id="1_q7le0"]
 [ext_resource type="Texture2D" uid="uid://cmpde8obo0f17" path="res://assets/tilesets/biome1/FarmLand_Tile.png" id="2_2v0bb"]

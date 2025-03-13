@@ -1,15 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqkl7bkfn6jvm"]
 
-[ext_resource type="Texture2D" uid="uid://d3kwgtiketpm6" path="res://assets/sprites/icon.svg" id="1_2krlh"]
-[ext_resource type="FontFile" uid="uid://2py3otgitx48" path="res://assets/fonts/rekindledrunes.ttf" id="2_st1p7"]
+[ext_resource type="Texture2D" uid="uid://djl6y336hdxar" path="res://ui/book_text/textbubble.png" id="1_ybuph"]
+[ext_resource type="FontFile" uid="uid://daawr67otlp7i" path="res://ui/book_text/Born2bSportyV2.ttf" id="2_5u32o"]
 
 [node name="MarginContainer" type="MarginContainer"]
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 48.0
+offset_bottom = 48.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_2krlh")
+texture = ExtResource("1_ybuph")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -17,11 +17,20 @@ patch_margin_bottom = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="text" type="Label" parent="MarginContainer"]
+light_mask = 2
+visibility_layer = 2
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_st1p7")
-theme_override_font_sizes/font_size = 64
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_5u32o")
+theme_override_font_sizes/font_size = 16
+text = "dsdsd"
 vertical_alignment = 1
+visible_characters = 0
+visible_ratio = -0.125
