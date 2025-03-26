@@ -33,4 +33,4 @@ theme_override_font_sizes/font_size = 16
 text = "dsdsd"
 vertical_alignment = 1
 visible_characters = 0
-visible_ratio = -0.125
+visible_ratio = 0.0
