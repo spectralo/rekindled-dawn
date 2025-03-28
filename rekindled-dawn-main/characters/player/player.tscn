@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://jb05c0muhil4"]
+[gd_scene load_steps=90 format=3 uid="uid://jb05c0muhil4"]
 
 [ext_resource type="Script" path="res://characters/player/nodereciever..gd" id="1_78keb"]
 [ext_resource type="Script" path="res://characters/player/player.gd" id="2_qhm36"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://2qdvirvw5lrk" path="res://assets/sprites/utils/Hearts.png" id="5_y22eq"]
 [ext_resource type="Texture2D" uid="uid://d4bipb022lutr" path="res://characters/player/sprites/left_walk-Sheet.png" id="6_hd7t4"]
 [ext_resource type="Texture2D" uid="uid://b7i6rjredbjgh" path="res://characters/player/sprites/right_walk-Sheet.png" id="7_udod8"]
+[ext_resource type="PackedScene" uid="uid://ck08p3cvaw6xx" path="res://ui/inventory/inventory.tscn" id="10_4e52t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_inm2g"]
 size = Vector2(15, 15)
@@ -603,12 +604,15 @@ animations = [{
 radius = 16.0
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(52, 57)
 script = ExtResource("1_78keb")
+metadata/_edit_group_ = true
 
 [node name="player" type="CharacterBody2D" parent="." groups=["Persists"]]
-position = Vector2(763, 370)
+position = Vector2(7.15256e-07, 5.96046e-08)
 scale = Vector2(5, 5)
 script = ExtResource("2_qhm36")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 position = Vector2(-0.599991, 14)
@@ -625,10 +629,10 @@ zoom = Vector2(0.7, 0.7)
 one_shot = true
 
 [node name="Hearts" type="HBoxContainer" parent="player"]
-offset_left = -215.0
-offset_top = -117.0
-offset_right = 34.0
-offset_bottom = -63.0
+offset_left = -158.6
+offset_top = -87.2
+offset_right = 90.4
+offset_bottom = -33.2
 scale = Vector2(0.5, 0.5)
 script = ExtResource("4_o8me0")
 
@@ -665,7 +669,11 @@ animation = &"full"
 [node name="Area2D" type="Area2D" parent="player"]
 
 [node name="smthelse" type="CollisionShape2D" parent="player/Area2D"]
-position = Vector2(-0.600006, 14)
+position = Vector2(-0.4, 9)
 shape = SubResource("CircleShape2D_2fy3v")
+
+[node name="inventory" parent="player" instance=ExtResource("10_4e52t")]
+position = Vector2(-160.8, 58.4)
+scale = Vector2(1, 1)
 
 [connection signal="text_moment" from="player" to="." method="_on_player_text_moment"]

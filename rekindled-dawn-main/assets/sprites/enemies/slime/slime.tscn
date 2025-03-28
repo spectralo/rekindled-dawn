@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvfif3ojjjdsj"]
+[gd_scene load_steps=16 format=3 uid="uid://bvfif3ojjjdsj"]
 
 [ext_resource type="Script" path="res://assets/sprites/enemies/slime/slime.gd" id="1_eqc7r"]
 [ext_resource type="Texture2D" uid="uid://bruahq56qlu6l" path="res://assets/sprites/enemies/slime/Slime.png" id="2_5hagk"]
@@ -93,6 +93,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_k3m0i"]
+radius = 7.07107
+
 [node name="slime" type="CharacterBody2D"]
 script = ExtResource("1_eqc7r")
 
@@ -108,6 +111,8 @@ autostart = true
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_k3m0i")
 
 [connection signal="timeout" from="changestatetimer" to="." method="_on_changestatetimer_timeout"]
 [connection signal="timeout" from="walkingtimer" to="." method="_on_walkingtimer_timeout"]

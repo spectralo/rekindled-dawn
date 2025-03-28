@@ -45,6 +45,7 @@ func move(mode=0):
 			direction = (get_global_mouse_position()-position).normalized()*5
 			direction.x = int(direction.x)
 			direction.y = int(direction.y)
+			
 			trans = Tween.TRANS_SPRING
 		if direction.x != 0 and direction.y != 0:
 			direction.normalized()
@@ -135,6 +136,12 @@ func _input(event: InputEvent) -> void:
 		for i in $Area2D.get_overlapping_areas():
 			if i.get_parent().has_method("get_text"):
 				emit_signal("text_moment",i.get_parent(),i.get_parent().get_global_position())
+			if i.get_parent().has_method("affirm_type"):
+				if i.get_parent().affirm_type() == "forage":
+					print("grass successfully touched")
+					$inventory/HBoxContainer.add_item(i.get_parent().return_inv()[0],i.get_parent().return_inv()[1])
+				#if i.get_parent().affirm_type == "brewery":
+					#i.get_parent().affirm_type()
 	#mouse attack, again, after checking if the thing being hurt is real
 	if Input.is_action_just_pressed("hurt"):
 		if $Area2D.get_overlapping_areas().size() > 0:

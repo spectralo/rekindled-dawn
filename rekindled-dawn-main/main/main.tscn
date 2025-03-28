@@ -1,13 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://p4118ivij2ce"]
+[gd_scene load_steps=18 format=3 uid="uid://p4118ivij2ce"]
 
 [ext_resource type="Script" path="res://main/save.gd" id="1_k68r5"]
-[ext_resource type="Texture2D" uid="uid://cmpde8obo0f17" path="res://assets/tilesets/biome1/FarmLand_Tile.png" id="2_vsrad"]
-[ext_resource type="Texture2D" uid="uid://cu5cvy71hmsyi" path="res://assets/tilesets/biome1/Cliff_Tile.png" id="3_v8a0a"]
-[ext_resource type="Texture2D" uid="uid://daxw7fia7kb8e" path="res://assets/tilesets/biome1/Grass_Middle.png" id="4_nh27e"]
-[ext_resource type="Texture2D" uid="uid://cbi05afbqxacp" path="res://assets/tilesets/biome1/Path_Middle.png" id="5_g8ccl"]
-[ext_resource type="Texture2D" uid="uid://cl8gxva1ogrd0" path="res://assets/tilesets/biome1/Path_Tile.png" id="6_kel2t"]
-[ext_resource type="Texture2D" uid="uid://c56ohpfqb221h" path="res://assets/tilesets/biome1/Water_Middle.png" id="7_bsbki"]
-[ext_resource type="Texture2D" uid="uid://covqmsg2ikxrw" path="res://assets/tilesets/biome1/Water_Tile.png" id="8_iassf"]
 [ext_resource type="Script" path="res://ui/book_text/book_text.gd" id="9_obiat"]
 [ext_resource type="Texture2D" uid="uid://dkhfbfnr3mlvx" path="res://exports/rekindled-dawns.icon.png" id="10_fgqxw"]
 [ext_resource type="PackedScene" uid="uid://bqkl7bkfn6jvm" path="res://ui/book_text/margin_container.tscn" id="11_h0sim"]
@@ -18,7 +11,6 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jf8mo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3v8j"]
-texture = ExtResource("2_vsrad")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -30,7 +22,6 @@ texture = ExtResource("2_vsrad")
 2:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xfkmq"]
-texture = ExtResource("3_v8a0a")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -49,15 +40,12 @@ texture = ExtResource("3_v8a0a")
 2:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s24p7"]
-texture = ExtResource("4_nh27e")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bwltf"]
-texture = ExtResource("5_g8ccl")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mh14n"]
-texture = ExtResource("6_kel2t")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -76,12 +64,10 @@ texture = ExtResource("6_kel2t")
 2:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_45sjd"]
-texture = ExtResource("7_bsbki")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.883883, -8, 8, 8, 8, 8, -8, -8, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e4nsb"]
-texture = ExtResource("8_iassf")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0

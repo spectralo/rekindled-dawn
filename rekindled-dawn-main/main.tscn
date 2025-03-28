@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://d00qthguxcqne"]
+[gd_scene load_steps=18 format=4 uid="uid://d00qthguxcqne"]
 
 [ext_resource type="Script" path="res://main/save.gd" id="1_q7le0"]
 [ext_resource type="Script" path="res://layers.gd" id="2_hd2ia"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bvfif3ojjjdsj" path="res://assets/sprites/enemies/slime/slime.tscn" id="10_3kaa1"]
 [ext_resource type="Texture2D" uid="uid://dkhfbfnr3mlvx" path="res://exports/rekindled-dawns.icon.png" id="10_6vqig"]
 [ext_resource type="PackedScene" uid="uid://bqkl7bkfn6jvm" path="res://ui/book_text/margin_container.tscn" id="11_3m83p"]
+[ext_resource type="PackedScene" uid="uid://bawk5fws6ls5f" path="res://environment/objects/plants/foragable/forage.tscn" id="11_daap1"]
+[ext_resource type="PackedScene" uid="uid://dsbxqlsh60boq" path="res://environment/objects/potions/stand.tscn" id="12_6uvpt"]
 [ext_resource type="PackedScene" uid="uid://le7jsbq447d4" path="res://characters/enemy/character.tscn" id="12_yvnlp"]
 [ext_resource type="PackedScene" uid="uid://jb05c0muhil4" path="res://characters/player/player.tscn" id="13_p7wys"]
 [ext_resource type="PackedScene" uid="uid://dhfw1omldv15u" path="res://characters/dude/dude.tscn" id="14_hbjdv"]
@@ -193,10 +195,10 @@ offset_bottom = 585.0
 position = Vector2(932, 236)
 scale = Vector2(0.8, 0.8)
 targ = NodePath("../player")
-type = 4
+type = 1
 
 [node name="player" parent="." instance=ExtResource("13_p7wys")]
-position = Vector2(-60, 0)
+position = Vector2(631, 397)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("14_hbjdv")]
 position = Vector2(928, 412)
@@ -206,6 +208,12 @@ script = null
 [node name="slime" parent="." instance=ExtResource("10_3kaa1")]
 position = Vector2(574, 329)
 scale = Vector2(4, 4)
+
+[node name="forage" parent="." instance=ExtResource("11_daap1")]
+position = Vector2(146, 221)
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("12_6uvpt")]
+position = Vector2(69, 58)
 
 [connection signal="finished" from="Book Layer" to="player" method="_on_book_layer_finished"]
 [connection signal="gui_input" from="Book Layer/AnimatedSprite2D/RichTextLabel" to="Book Layer" method="_on_rich_text_label_gui_input"]

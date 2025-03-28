@@ -1,8 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck08p3cvaw6xx"]
+[gd_scene load_steps=3 format=3 uid="uid://ck08p3cvaw6xx"]
 
-[ext_resource type="Script" path="res://scripts/inventory.gd" id="1_ujy3f"]
+[ext_resource type="PackedScene" uid="uid://u8wl85uu60kn" path="res://ui/inventory/slot.tscn" id="1_1y4ag"]
+[ext_resource type="Script" path="res://ui/inventory/h_box_container.gd" id="1_vyjrc"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Inventory" type="Node2D" parent="."]
-script = ExtResource("1_ujy3f")
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 430.0
+offset_bottom = 41.0
+script = ExtResource("1_vyjrc")
+
+[node name="slot" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(21, 21)
+
+[node name="slot2" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(309, 21)
+
+[node name="slot3" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(277, 21)
+
+[node name="slot4" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(245, 21)
+
+[node name="slot5" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(213, 21)
+
+[node name="slot6" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(181, 21)
+
+[node name="slot7" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(149, 21)
+
+[node name="slot8" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(117, 21)
+
+[node name="slot9" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(85, 21)
+
+[node name="slot10" parent="HBoxContainer" instance=ExtResource("1_1y4ag")]
+position = Vector2(53, 21)
