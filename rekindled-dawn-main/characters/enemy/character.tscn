@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://le7jsbq447d4"]
+[gd_scene load_steps=13 format=3 uid="uid://le7jsbq447d4"]
 
 [ext_resource type="Script" path="res://characters/enemy/enemy.gd" id="1_fnv3f"]
 [ext_resource type="Texture2D" uid="uid://cgugbejky03vs" path="res://assets/sprites/enemies/skeleton/Skeleton.png" id="2_bkosf"]
@@ -59,6 +59,9 @@ size = Vector2(11, 15)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qnk6l"]
 radius = 15.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yptn3"]
+radius = 232.138
+
 [node name="enemy" type="CharacterBody2D" groups=["Persists"]]
 position = Vector2(0, -4)
 script = ExtResource("1_fnv3f")
@@ -84,3 +87,11 @@ one_shot = true
 position = Vector2(-2, -3)
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_qnk6l")
+
+[node name="alert" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alert"]
+shape = SubResource("CircleShape2D_yptn3")
+debug_color = Color(0.869714, 0.331594, 0.310731, 0.42)
+
+[connection signal="area_entered" from="alert" to="." method="_on_alert_area_entered"]

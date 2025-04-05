@@ -1,6 +1,6 @@
 extends Sprite2D
 
-var noun = 'carrot'
+@export var noun: String 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -13,5 +13,5 @@ func affirm_type():
 	return "forage"
 	
 func return_inv():
-	visible = false
+	queue_free()
 	return [texture,noun]

@@ -118,6 +118,9 @@ func _physics_process(delta: float) -> void:
 	#talk(delta)
 	process_input()
 	animate()
+	if HP <= 0:
+		position = Vector2(0,0)
+		HP = 10
 	#checks if there is an object adjacent in the direction the character is pointing towards
 	col = move_and_collide(translate_dir(dir)*16*5,true)
 	if col:
@@ -140,14 +143,16 @@ func _input(event: InputEvent) -> void:
 				if i.get_parent().affirm_type() == "forage":
 					print("grass successfully touched")
 					$inventory/HBoxContainer.add_item(i.get_parent().return_inv()[0],i.get_parent().return_inv()[1])
-				#if i.get_parent().affirm_type == "brewery":
-					#i.get_parent().affirm_type()
+				if i.get_parent().affirm_type() =="teleporter":
+					position = i.get_parent().send()
+				if i.get_parent().affirm_type() == "brewery":
+					i.get_parent().affirm_type()
 	#mouse attack, again, after checking if the thing being hurt is real
 	if Input.is_action_just_pressed("hurt"):
 		if $Area2D.get_overlapping_areas().size() > 0:
 			for i in $Area2D.get_overlapping_areas():
 				if i.get_parent().has_method("affirm_type"):
-					if i.get_parent().affirm_type() != "player":
+					if i.get_parent().affirm_type() != "player" and i.name != "alert":
 						print(i.get_parent().affirm_type())
 						print('hello')
 						var t = i.get_parent()
@@ -160,8 +165,7 @@ func _input(event: InputEvent) -> void:
 						t.move(0)
 						t.hit = true
 						_animated_sprite.play("attack_"+dir)
-					
-				
+
 func save():
 	return [position.x,position.x,HP]
 

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://u7c03asrjsf5"]
+
+[ext_resource type="Texture2D" uid="uid://d3kwgtiketpm6" path="res://assets/icon.svg" id="1_d21eq"]
+[ext_resource type="Script" path="res://teleport.gd" id="2_78ldc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bkld4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_d21eq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h71sx"]
+radius = 86.728
+
+[node name="teleport" type="AnimatedSprite2D" groups=["teleport"]]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(0.636719, 0.644531)
+sprite_frames = SubResource("SpriteFrames_bkld4")
+script = ExtResource("2_78ldc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h71sx")

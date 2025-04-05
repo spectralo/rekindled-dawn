@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsbxqlsh60boq"]
+[gd_scene load_steps=8 format=3 uid="uid://dsbxqlsh60boq"]
 
 [ext_resource type="Texture2D" uid="uid://2ibfgupbgs4v" path="res://exports/rekindled-dawns.apple-touch-icon.png" id="1_d85aw"]
 [ext_resource type="Script" path="res://environment/objects/potions/stand.gd" id="2_rluww"]
 [ext_resource type="Texture2D" uid="uid://djl6y336hdxar" path="res://ui/book_text/textbubble.png" id="2_t46l0"]
+[ext_resource type="Script" path="res://environment/objects/potions/canvas_layer.gd" id="3_dbijx"]
 [ext_resource type="PackedScene" uid="uid://u8wl85uu60kn" path="res://ui/inventory/slot.tscn" id="3_ed6h5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_60i12"]
@@ -34,6 +35,7 @@ shape = SubResource("CircleShape2D_djex2")
 visible = false
 scale = Vector2(5, 5)
 transform = Transform2D(5, 0, 0, 5, 0, 0)
+script = ExtResource("3_dbijx")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(115, 53.1)
@@ -57,3 +59,5 @@ position = Vector2(177.4, 55.6)
 
 [node name="slot6" parent="CanvasLayer" instance=ExtResource("3_ed6h5")]
 position = Vector2(74.2, 79.8)
+
+[connection signal="clear" from="CanvasLayer/slot5" to="CanvasLayer" method="_on_slot_5_clear"]

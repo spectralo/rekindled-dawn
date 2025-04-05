@@ -10,6 +10,7 @@ var tween: Tween
 var tpos: Vector2
 var tween_exists = false
 var hit = false
+var kill = false
 
 @onready var target = targ.get_node("player")
 @onready var otherpos = target.position
@@ -20,36 +21,40 @@ func _ready():
 		cooldown.wait_time = 2
 		
 func _process(delta):
-	otherpos = target.position
-	if tween_exists:
-		if not tween.is_running():
-			tween_exists = false
-		var collision = move_and_collide(position-otherpos,true)
-		if collision and not hit:
-			if collision.get_collider().has_method("affirm_type"):
-				if collision.get_collider().affirm_type() == "player":
-					print('hellllllllllllllllll')
-					collision.get_collider().direction = Vector2(-collision.get_normal().x*2,-collision.get_normal().y*2)
-					collision.get_collider().move(0)
-					collision.get_collider().HP-=1
-			else:
-				position += collision.get_normal()*16*5
-			tween.kill()
-	if type == 0:
-		velocity = (position-otherpos).normalized()*-2
-		var collision = move_and_collide(velocity)
-		if collision:
-			attack(collision.get_collider(),collision)
-	if type == 1:
-		if cooldown.is_stopped():
-			var target_position = position+(position-otherpos).normalized()*-80*4
-			tween_exists = true
-			tween = create_tween()
-			tween.tween_property(self, "position", target_position, 1).set_trans(Tween.TRANS_SPRING)
-			tpos = target_position
-			cooldown.start()
-	if type == 2:
-		otherpos.get_distance()
+	if HP and kill:
+		otherpos = target.global_position
+		if tween_exists:
+			if not tween.is_running():
+				tween_exists = false
+			var collision = move_and_collide(position-otherpos,true)
+			if collision and not hit:
+				if collision.get_collider().has_method("affirm_type"):
+					if collision.get_collider().affirm_type() == "player":
+						print('hellllllllllllllllll')
+						collision.get_collider().direction = Vector2(-collision.get_normal().x*2,-collision.get_normal().y*2)
+						collision.get_collider().move(0)
+						collision.get_collider().HP-=1
+				else:
+					position += collision.get_normal()*16*5
+				tween.kill()
+		if type == 0:
+			velocity = (otherpos-position).normalized()*5
+			print(otherpos)
+			var collision = move_and_collide(velocity)
+			if collision:
+				attack(collision.get_collider(),collision)
+		if type == 1:
+			if cooldown.is_stopped():
+				var target_position = position+(position-otherpos).normalized()*-80*4
+				tween_exists = true
+				tween = create_tween()
+				tween.tween_property(self, "position", target_position, 1).set_trans(Tween.TRANS_SPRING)
+				tpos = target_position
+				cooldown.start()
+		if type == 2:
+			otherpos.get_distance()
+	if HP <= 0:
+		queue_free()
 	#
 func attack(collidee,collision):
 	if cooldown.is_stopped():
@@ -119,3 +124,11 @@ func load(vals):
 func move_false():
 	moving = false
 	hit = false
+
+func _on_alert_area_entered(area: Area2D) -> void:
+	if area.get_parent().affirm_type()=="player":
+		kill = true
+		print('entered')
+	else:
+		if area.get_parent().affirm_type()=='enemy' and area.get_parent().kill:
+			kill = true

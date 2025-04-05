@@ -1,15 +1,16 @@
-extends AnimatedSprite2D
+extends Node
 
-@export var inventory : Node
+var sprite
+var number
+var noun
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	sprite = null
+	number = null
+	noun = null
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func affirm_type():
-	$CanvasLayer.visible = not $CanvasLayer.visible
-	return "brewery"
+
 	

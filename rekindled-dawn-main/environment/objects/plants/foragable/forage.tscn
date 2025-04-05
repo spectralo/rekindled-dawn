@@ -10,6 +10,7 @@ radius = 9.40213
 scale = Vector2(5, 5)
 texture = ExtResource("1_btkcs")
 script = ExtResource("2_46i0w")
+noun = "Carrot"
 
 [node name="Area2D" type="Area2D" parent="."]
 
