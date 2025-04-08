@@ -1,9 +1,9 @@
 [gd_scene load_steps=90 format=3 uid="uid://jb05c0muhil4"]
 
-[ext_resource type="Script" path="res://characters/player/nodereciever..gd" id="1_78keb"]
-[ext_resource type="Script" path="res://characters/player/player.gd" id="2_qhm36"]
+[ext_resource type="Script" uid="uid://bmoopwaa76ape" path="res://characters/player/nodereciever..gd" id="1_78keb"]
+[ext_resource type="Script" uid="uid://coythy6k5cdic" path="res://characters/player/player.gd" id="2_qhm36"]
 [ext_resource type="Texture2D" uid="uid://cgf15ef38frg0" path="res://assets/sprites/characters/mage/Mage-Sheet.png" id="3_ah6lp"]
-[ext_resource type="Script" path="res://characters/player/h_box_container.gd" id="4_o8me0"]
+[ext_resource type="Script" uid="uid://5esob3nvsn1r" path="res://characters/player/h_box_container.gd" id="4_o8me0"]
 [ext_resource type="Texture2D" uid="uid://bdmoykmelgx5b" path="res://characters/player/sprites/back_walk-Sheet.png" id="4_vxxqk"]
 [ext_resource type="Texture2D" uid="uid://c3wibq1qy1oxt" path="res://characters/player/sprites/front_walk-Sheet.png" id="5_6tx77"]
 [ext_resource type="Texture2D" uid="uid://2qdvirvw5lrk" path="res://assets/sprites/utils/Hearts.png" id="5_y22eq"]

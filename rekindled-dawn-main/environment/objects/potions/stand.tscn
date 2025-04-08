@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dsbxqlsh60boq"]
 
 [ext_resource type="Texture2D" uid="uid://2ibfgupbgs4v" path="res://exports/rekindled-dawns.apple-touch-icon.png" id="1_d85aw"]
-[ext_resource type="Script" path="res://environment/objects/potions/stand.gd" id="2_rluww"]
+[ext_resource type="Script" uid="uid://dat0p5o6ouaxb" path="res://environment/objects/potions/stand.gd" id="2_rluww"]
 [ext_resource type="Texture2D" uid="uid://djl6y336hdxar" path="res://ui/book_text/textbubble.png" id="2_t46l0"]
-[ext_resource type="Script" path="res://environment/objects/potions/canvas_layer.gd" id="3_dbijx"]
+[ext_resource type="Script" uid="uid://c2aedtxxu15hj" path="res://environment/objects/potions/canvas_layer.gd" id="3_dbijx"]
 [ext_resource type="PackedScene" uid="uid://u8wl85uu60kn" path="res://ui/inventory/slot.tscn" id="3_ed6h5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_60i12"]

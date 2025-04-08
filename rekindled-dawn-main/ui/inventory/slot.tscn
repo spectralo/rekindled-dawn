@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://u8wl85uu60kn"]
 
-[ext_resource type="Script" path="res://ui/inventory/slot.gd" id="1_d3pap"]
+[ext_resource type="Script" uid="uid://hv7312r4xcis" path="res://ui/inventory/slot.gd" id="1_d3pap"]
 [ext_resource type="Texture2D" uid="uid://dkhfbfnr3mlvx" path="res://exports/rekindled-dawns.icon.png" id="2_nbbjp"]
 
 [node name="slot" type="Node2D" groups=["slots"]]
