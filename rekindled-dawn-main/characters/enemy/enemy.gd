@@ -117,6 +117,7 @@ func save():
 	return [position.x,position.y,HP]
 	
 func load(vals):
+	print(vals)
 	position.x = vals[0]
 	position.y = vals[1]
 	HP = vals[2]

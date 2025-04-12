@@ -3,10 +3,10 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if not FileAccess.file_exists("res://savegame.save"):
+	if not FileAccess.file_exists("user://savegame.save"):
 		return
 	else: 
-		var save_file = FileAccess.open("res://savegame.save", FileAccess.READ)
+		var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 		print("File Size:", save_file.get_length())
 		var save_nodes = get_tree().get_nodes_in_group("Persists")
 		for node in save_nodes:
